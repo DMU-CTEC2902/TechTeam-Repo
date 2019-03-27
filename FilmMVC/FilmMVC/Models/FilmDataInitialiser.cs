@@ -41,6 +41,7 @@ namespace FilmMVC.Models
             fil1.Title = "Transformers";
             fil1.Description = "Autobots with the help of a teenager battle Decepticons for an acient object on Earth.";
             fil1.Year = 2007;
+            fil1.Image = "https://m.media-amazon.com/images/M/MV5BNDg1NTU2OWEtM2UzYi00ZWRmLWEwMTktZWNjYWQ1NWM1OThjXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
             fil1.Director = dir1;
             context.Films.Add(fil1);
             //film2
@@ -50,6 +51,7 @@ namespace FilmMVC.Models
             fil2.Title = "Star Wars: Episode IV - A New Hope";
             fil2.Description = "Luke Skywalker joins a Jedi, a pilot and a wookie to save the galaxy from the Empire whilst trying to rescue Princess Leia.";
             fil2.Year = 1977;
+            fil2.Image = "https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SY1000_CR0,0,643,1000_AL_.jpg";
             fil2.Director = dir2;
             context.Films.Add(fil2);
             //film3
@@ -59,6 +61,7 @@ namespace FilmMVC.Models
             fil3.Title = "Black Panther";
             fil3.Description = "Prince T'Challa must take on the mantle as king of Wakanda and deal with civil unrest along with being Black panther.";
             fil3.Year = 2018;
+            fil3.Image = "https://m.media-amazon.com/images/M/MV5BMTg1MTY2MjYzNV5BMl5BanBnXkFtZTgwMTc4NTMwNDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg";
             fil3.Director = dir3;
             context.Films.Add(fil3);
 

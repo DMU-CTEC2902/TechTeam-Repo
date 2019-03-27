@@ -13,6 +13,7 @@ namespace FilmMVC.Models
         public virtual string Description { get; set; }
         public virtual int Year { get; set; }
 
+        public virtual string Image { get; set; }
         public virtual Director Director { get; set; }
 
     }
