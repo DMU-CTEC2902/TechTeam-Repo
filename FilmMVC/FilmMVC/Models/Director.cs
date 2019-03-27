@@ -11,5 +11,8 @@ namespace FilmMVC.Models
         public virtual string Name { get; set; }
 
         public DateTime DateOfBirth { get; set; }
+
+        public virtual string Photo { get; set; }
+        public virtual List<Film> Films { get; set; }
     }
 }

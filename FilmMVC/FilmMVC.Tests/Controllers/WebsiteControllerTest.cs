@@ -41,7 +41,7 @@ namespace FilmMVC.Tests.Controllers
 
             //Assert
 
-            Assert.AreEqual("Deadpool", result.Title);
+            Assert.AreEqual("Transformers", result.Title);
 
         }
     }
