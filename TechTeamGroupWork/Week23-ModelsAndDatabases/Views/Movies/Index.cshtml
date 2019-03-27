@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FilmReview.Models.Movie>
+
+    <p>
+       @if (Session["userAdmin"] != null) {
+           if (Session["userAdmin"].Equals("admin"))
+           {
+                @Html.ActionLink("Create New", "Create")
+           }
+       }
+    </p>
+@using (Html.BeginForm("Search", "Movies", FormMethod.Post))
+            {
+    @Html.AntiForgeryToken()
+    <div class="col-md-3 pull-right">
+        <div class="col-md-6">
+            @Html.DropDownList("GenraId", null, htmlAttributes: new { @class = "form-control", required = "required" })
+        </div>
+        <div class="col-md-6 pull-right">
+            <input type="submit" value="Search" class="btn btn-default" />
+        </div>
+      </div>
+}
+    <table class="table">
+        <tr>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.MovieTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MovieYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genra.GenraType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Director.DirectorName)
+            </th>
+            <th>
+           
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MovieYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genra.GenraType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Director.DirectorName)
+            </td>
+            @if (Session["userAdmin"] != null)
+            { 
+                if (Session["userAdmin"].Equals("admin"))
+            {
+                <td>
+
+               
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MovieId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MovieId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MovieId })
+               
+
+
+                </td>
+                }
+                else
+                {
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = item.MovieId })
+                    </td>
+                }
+            }
+            else
+            {
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.MovieId })
+            </td>
+            }
+        </tr>
+    }
+    
+    </table>
+

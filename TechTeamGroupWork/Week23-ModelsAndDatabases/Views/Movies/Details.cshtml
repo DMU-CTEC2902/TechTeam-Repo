@@ -1,0 +1,146 @@
+﻿@model FilmReview.Models.Movie
+
+
+@using (Html.BeginForm("AddReview", "Movies"))
+{
+    @Html.AntiForgeryToken()
+<div>
+    <h4>Movie</h4>
+    <hr />
+
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/images/@Model.MovieImage" />
+        </div>
+    <div class="col-md-8">
+    <dl class="dl-horizontal">
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieTitle)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovieTitle)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MovieYear)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MovieYear)
+        </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Genra.GenraType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genra.GenraType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Director.DirectorName)
+        </dt>
+
+        <dd>
+            @Html.ActionLink(Model.Director.DirectorName, "Details", "Directors", new { id = Model.DirectorId }, null)
+
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actors)
+        </dt>
+
+        @foreach (var element in Model.Actors)
+            {
+
+            <dd>
+                @Html.ActionLink(element.ActorName, "Details", "Actors", new { id = element.ActorId }, null)
+
+            </dd>
+        }
+        </dl>
+        </div>
+        </div>
+        <div class="col-md-12 reviews">
+            <div class="review-header">
+                @Html.DisplayNameFor(model => model.Reviews)
+            </div>
+            <div class="row">
+                @foreach (var element in Model.Reviews)
+            {
+                    <div class="review-iterate">
+                        <div class="col-md-4 reviewUser">
+                            <h3>
+                                @Html.DisplayFor(model => element.ReviewUser)
+                            </h3>
+                            <p>@Html.DisplayFor(model => element.ReviewTime)</p>
+                        </div>
+                        <div class="col-md-8 review-body">
+                            <p>
+                                @Html.DisplayFor(model => element.Description)
+                            </p>
+                        @if (Session["userAdmin"] != null)
+                        {
+                            if (Session["userAdmin"].Equals("admin"))
+                            {
+                                                    <p>
+                                @Html.HiddenFor(model => model.MovieId, new { htmlAttributes = new { @class = "form-control" } })
+                                
+                                @Html.ActionLink("Delete", "Delete", "Reviews", new { id = element.ReviewId }, null)
+      
+                            </p>
+                            }
+                        }
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        @if (Session["userId"] != null)
+        {
+            <div class="col-md-12 addreview">
+                <div class="form-group">
+                    <textarea name="reviewDesciption" id="reviewDesciption" ></textarea>
+                    @Html.HiddenFor(model => model.MovieId, new { htmlAttributes = new { @class = "form-control" } })               
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" value="Add Review" class="btn btn-default" />
+                    </div>
+                </div>
+
+            </div>
+     }
+</div> 
+}
+@if (Session["userAdmin"] != null)
+{ 
+    if (Session["userAdmin"].Equals("admin"))
+    {
+    <p>
+       
+        @Html.ActionLink("Edit", "Edit", new { id = Model.MovieId }) |
+        @Html.ActionLink("Back to List", "Index")
+        
+    </p>
+    }
+    else
+    {
+        <p>
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+}
+else
+{
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
