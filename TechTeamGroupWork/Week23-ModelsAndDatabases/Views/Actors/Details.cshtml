@@ -1,0 +1,92 @@
+﻿@model FilmReview.Models.Actor
+
+@using (Html.BeginForm("AssignMovie", "Actors"))
+{
+    @Html.AntiForgeryToken()
+    <div>
+    <h4>Actor</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/images/@Model.ActorImage" />
+        </div>
+        <div class="col-md-8">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ActorName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ActorName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.ActorGender)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ActorGender)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ActorDOB)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ActorDOB)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Movies)
+                </dt>
+                
+                @foreach (var element in Model.Movies)
+                {
+
+                    <dd>
+                        @Html.ActionLink(element.MovieTitle, "Details", "Movies", new { id = element.MovieId }, null)
+                    </dd>
+                }
+                
+            </dl>
+            @if (Session["userId"] != null)
+            {
+            <div class="form-group">
+                @Html.LabelFor(model => model.Movies, "New Movie", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.HiddenFor(model => model.ActorId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownList("MovieId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Movies, "", new { @class = "text-danger" })
+                </div>
+                <input type="submit" value="Assign Movie " class="btn btn-default" />
+            </div>
+            }
+
+        </div>
+        </div>
+        </div>
+}
+
+        @if (Session["userAdmin"] != null)
+        {
+            if (Session["userAdmin"].Equals("admin"))
+            {
+                <p>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.ActorId }) |
+                    @Html.ActionLink("Back to List", "Index")
+
+                </p>
+            }
+            else
+            {
+                <p>
+                    @Html.ActionLink("Back to List", "Index")
+                </p>
+            }
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        }
+
+
