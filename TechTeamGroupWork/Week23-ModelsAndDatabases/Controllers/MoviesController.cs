@@ -20,7 +20,7 @@ namespace FilmReview.Controllers
         {
 
             var movies = db.Movies.Include(p => p.Director);
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType");
+            ViewBag.GenraId = new SelectList(db.Genres, "GenreId", "GenreName");
             return View(movies.ToList());
 
         }
@@ -43,10 +43,10 @@ namespace FilmReview.Controllers
             return View(movie);
         }
 
-        public ViewResult Details()
+        /*public ViewResult Details()
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         // GET: Products/Create
         public ActionResult Create()
@@ -57,7 +57,7 @@ namespace FilmReview.Controllers
             }
 
             ViewBag.DirectorId = new SelectList(db.Directors, "DirectorId", "DirectorName");
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType");
+            ViewBag.GenraId = new SelectList(db.Genres, "GenreId", "GenreName");
             return View();
         }
 
@@ -87,7 +87,7 @@ namespace FilmReview.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType", movie.Genra.GenraId);
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "GenreName", movie.Genre.GenreId);
             return View(movie);
         }
 
@@ -111,7 +111,7 @@ namespace FilmReview.Controllers
 
 
             ViewBag.DirectorId = new SelectList(db.Directors, "DirectorId", "DirectorName", movie.Director);
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType", movie.Genra);
+            ViewBag.GenraId = new SelectList(db.Genres, "GenreId", "GenreName", movie.Genre);
             return View(movie);
         }
 
@@ -141,7 +141,7 @@ namespace FilmReview.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.DirectorId = new SelectList(db.Directors, "DirectorId", "DirectorName", movie.Director);
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType", movie.Genra);
+            ViewBag.GenraId = new SelectList(db.Genres, "GenreId", "GenreName", movie.Genre);
             return View(movie);
         }
 
@@ -212,9 +212,9 @@ namespace FilmReview.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Search()
         {
-            ViewBag.GenraId = new SelectList(db.Genras, "GenraId", "GenraType");
-            var genra = Request["GenraId"];
-            var g = db.Movies.Where(p => p.Genra.GenraId.ToString() == genra);
+            ViewBag.GenreId = new SelectList(db.Genres, "GenreId", "GenreName");
+            var genre = Request["GenreId"];
+            var g = db.Movies.Where(p => p.Genre.GenreId.ToString() == genre);
 
             return View("Index", g.ToList());
         }
