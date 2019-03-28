@@ -26,7 +26,7 @@ namespace FilmReview.Models
         }
 
         public System.Data.Entity.DbSet<Movie> Movies { get; set; }
-        public System.Data.Entity.DbSet<Genre> Genras { get; set; }
+        public System.Data.Entity.DbSet<Genre> Genres { get; set; }
         public System.Data.Entity.DbSet<Director> Directors { get; set; }
         public System.Data.Entity.DbSet<Actor> Actors { get; set; }
         public System.Data.Entity.DbSet<Review> Reviews { get; set; }

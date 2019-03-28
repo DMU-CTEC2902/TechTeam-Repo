@@ -16,7 +16,7 @@ namespace FilmReview.Models
         public int MovieYear { get; set; }
         public string MovieImage { get; set; }
 
-        public virtual Genre Genra { get; set; }
+        public virtual Genre Genre { get; set; }
         public virtual Director Director { get; set; }
  
         public virtual ICollection<Actor> Actors { get; set; }
